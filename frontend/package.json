@@ -68,7 +68,10 @@
     "bcryptjs": "^2.4.3",
     "antd": "^5.8.6",
     "axios": "^1.5.0",
-    "dayjs": "^1.11.9"
+    "dayjs": "^1.11.9",
+    "@tanstack/react-query": "^4.32.6",
+    "@tanstack/react-query-devtools": "^4.32.6",
+    "react-beautiful-dnd": "^13.1.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.9",
