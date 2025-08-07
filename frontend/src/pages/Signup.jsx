@@ -1,6 +1,8 @@
-import { Form, Input, Button, Card, message } from 'antd';
+import { Form, Input, Button, Card, message, Typography } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import api from '../services/api';
+
+const { Title, Text } = Typography;
 
 const Signup = ({ onSignup, onSwitchToLogin }) => {
   const [form] = Form.useForm();
@@ -15,45 +17,199 @@ const Signup = ({ onSignup, onSwitchToLogin }) => {
   };
 
   return (
-    <Card title='Sign Up' style={{ width: '100%' }}>
-      <Form form={form} onFinish={handleSubmit} layout='vertical'>
-        <Form.Item
-          name='email'
-          rules={[
-            {
-              required: true,
-              type: 'email',
-              message: 'Please enter a valid email',
-            },
-          ]}
+    <div
+      style={{
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '20px',
+      }}
+    >
+      <Card
+        bordered={false}
+        style={{
+          width: '100%',
+          maxWidth: 420,
+          borderRadius: 20,
+          background: 'rgba(255, 255, 255, 0.95)',
+          backdropFilter: 'blur(20px)',
+          boxShadow:
+            '0 20px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.1)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          padding: '20px 10px',
+        }}
+      >
+        <div style={{ textAlign: 'center', marginBottom: 40 }}>
+          <div
+            style={{
+              width: 80,
+              height: 80,
+              borderRadius: '50%',
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              margin: '0 auto 24px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 10px 30px rgba(102, 126, 234, 0.3)',
+            }}
+          >
+            <UserOutlined style={{ fontSize: 32, color: 'white' }} />
+          </div>
+          <Title
+            level={2}
+            style={{
+              margin: 0,
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              fontWeight: 700,
+            }}
+          >
+            Create Account
+          </Title>
+          <Text
+            type='secondary'
+            style={{ fontSize: 16, display: 'block', marginTop: 8 }}
+          >
+            Join us and start your journey
+          </Text>
+        </div>
+
+        <Form
+          form={form}
+          onFinish={handleSubmit}
+          layout='vertical'
+          size='large'
         >
-          <Input prefix={<UserOutlined />} placeholder='Email' />
-        </Form.Item>
-        <Form.Item
-          name='password'
-          rules={[
-            {
-              required: true,
-              min: 6,
-              message: 'Password must be at least 6 characters',
-            },
-          ]}
+          <Form.Item
+            name='email'
+            rules={[
+              {
+                required: true,
+                type: 'email',
+                message: 'Please enter a valid email',
+              },
+            ]}
+            style={{ marginBottom: 24 }}
+          >
+            <Input
+              prefix={<UserOutlined style={{ color: '#667eea' }} />}
+              placeholder='Enter your email'
+              style={{
+                borderRadius: 12,
+                border: '2px solid #f0f2f5',
+                padding: '12px 16px',
+                fontSize: 16,
+                transition: 'all 0.3s ease',
+              }}
+              onFocus={(e) => {
+                e.target.style.borderColor = '#667eea';
+                e.target.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.1)';
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = '#f0f2f5';
+                e.target.style.boxShadow = 'none';
+              }}
+            />
+          </Form.Item>
+
+          <Form.Item
+            name='password'
+            rules={[
+              {
+                required: true,
+                min: 6,
+                message: 'Password must be at least 6 characters',
+              },
+            ]}
+            style={{ marginBottom: 32 }}
+          >
+            <Input.Password
+              prefix={<LockOutlined style={{ color: '#667eea' }} />}
+              placeholder='Create a password'
+              style={{
+                borderRadius: 12,
+                border: '2px solid #f0f2f5',
+                padding: '12px 16px',
+                fontSize: 16,
+                transition: 'all 0.3s ease',
+              }}
+              onFocus={(e) => {
+                e.target.parentElement.style.borderColor = '#667eea';
+                e.target.parentElement.style.boxShadow =
+                  '0 0 0 3px rgba(102, 126, 234, 0.1)';
+              }}
+              onBlur={(e) => {
+                e.target.parentElement.style.borderColor = '#f0f2f5';
+                e.target.parentElement.style.boxShadow = 'none';
+              }}
+            />
+          </Form.Item>
+
+          <Form.Item>
+            <Button
+              type='primary'
+              htmlType='submit'
+              block
+              style={{
+                height: 50,
+                borderRadius: 12,
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                border: 'none',
+                fontSize: 16,
+                fontWeight: 600,
+                boxShadow: '0 4px 15px rgba(102, 126, 234, 0.4)',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.transform = 'translateY(-2px)';
+                e.target.style.boxShadow =
+                  '0 6px 20px rgba(102, 126, 234, 0.5)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = 'translateY(0)';
+                e.target.style.boxShadow =
+                  '0 4px 15px rgba(102, 126, 234, 0.4)';
+              }}
+            >
+              Create Account
+            </Button>
+          </Form.Item>
+        </Form>
+
+        <div
+          style={{
+            textAlign: 'center',
+            marginTop: 24,
+            padding: '20px 0 0',
+            borderTop: '1px solid #f0f2f5',
+          }}
         >
-          <Input.Password prefix={<LockOutlined />} placeholder='Password' />
-        </Form.Item>
-        <Form.Item>
-          <Button type='primary' htmlType='submit' style={{ width: '100%' }}>
-            Sign Up
-          </Button>
-        </Form.Item>
-        <div style={{ textAlign: 'center' }}>
-          Already have an account?{' '}
-          <Button type='link' onClick={onSwitchToLogin}>
-            Login
+          <Text type='secondary' style={{ fontSize: 15 }}>
+            Already have an account?
+          </Text>
+          <Button
+            type='link'
+            onClick={onSwitchToLogin}
+            style={{
+              fontSize: 15,
+              fontWeight: 600,
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              padding: '4px 8px',
+              height: 'auto',
+            }}
+          >
+            Sign in here
           </Button>
         </div>
-      </Form>
-    </Card>
+      </Card>
+    </div>
   );
 };
 
